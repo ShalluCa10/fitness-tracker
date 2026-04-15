@@ -1,0 +1,55 @@
+doctype html
+html
+  head
+    title Fitness Tracker
+    link(rel="stylesheet", href="/style.css")
+
+  body
+
+    // HEADER
+    header.header
+      h1 Fitness Tracker 💪
+      nav
+        a(href="/") Home
+        a(href="/exercise") Workouts
+        a(href="/food") Nutrition
+
+    // HERO BANNER (Carousel)
+    .carousel
+      .slide Motivation 1: "No pain, no gain 💥"
+      .slide Motivation 2: "Push yourself every day 🔥"
+      .slide Motivation 3: "Consistency is everything 🏆"
+
+    // CATEGORY SECTION
+    .categories
+      h2 Categories
+      .cat-list
+        span.card Chest
+        span.card Arms
+        span.card Legs
+        span.card Back
+        span.card Abs
+
+    // FEATURED WORKOUTS
+    h2 Featured Workouts
+
+    .grid
+      each ex in exercises
+        .card
+          - var name = "No name";
+          - var img = "";
+
+          if ex.translations && ex.translations.length > 0
+            - name = ex.translations[0].name;
+
+          if ex.images && ex.images.length > 0
+            - img = ex.images[0].image;
+
+          if img
+            img.small(src=img)
+
+          h3= name
+
+    // FOOTER
+    footer.footer
+      p © 2026 Fitness Tracker | Built by Sameera

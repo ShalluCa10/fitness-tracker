@@ -1,0 +1,34 @@
+doctype html
+html
+  head
+    title= category + " Workouts"
+    link(rel="stylesheet", href="/style.css")
+
+  body
+    include partials/header
+
+    h1= category + " Exercises"
+
+    if exercises && exercises.length > 0
+      .grid
+        each ex in exercises
+          a.card(href=`/workout/detail/${ex.id}`)
+
+            // IMAGE
+            if ex.images && ex.images.length > 0
+              img.card-img(src=ex.images[0].image)
+            else
+              img.card-img(src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4JK7QAtRJH5lyfw2o7PcsTpiDDiivoYQz0Q&s")
+
+            .card-content
+              if ex.translations && ex.translations.length > 0
+                h2= ex.translations[0].name
+                if ex.translations[0].description
+                  p!= ex.translations[0].description.substring(0, 120) + "..."
+              else
+                h2 No name available
+
+    else
+      p No exercises found for this category.
+
+    include partials/footer

@@ -1,0 +1,48 @@
+doctype html
+html
+  head
+    title Home
+    link(rel="stylesheet", href="/style.css")
+
+  body
+    include partials/header
+
+  
+    if banners && banners.length > 0
+      .carousel
+        each b, i in banners
+          .slide(class=i === 0 ? "active" : "")
+            .quote-box
+              h2 “#{b.text}”
+              p - #{b.author}
+    else
+      p No banners found
+
+    script.
+      const slides = document.querySelectorAll(".slide");
+      let index = 0;
+
+      if (slides.length > 0) {
+        setInterval(() => {
+          slides.forEach(s => s.classList.remove("active"));
+          index = (index + 1) % slides.length;
+          slides[index].classList.add("active");
+        }, 5000);
+      }
+
+  
+    h1 Workout Categories 💪
+
+    if categories && categories.length > 0
+      .grid
+        each c in categories
+          a.card(href=`/workout/${c.name}`)
+            h2= c.name
+            p #{c.count} exercises
+            img.card-img(src=c.image || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4JK7QAtRJH5lyfw2o7PcsTpiDDiivoYQz0Q&s")
+    else
+      if categories
+        p No categories found
+      else
+        p Loading categories...
+  include partials/footer

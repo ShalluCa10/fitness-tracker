@@ -1,0 +1,31 @@
+doctype html
+html
+  head
+    title Exercise Detail
+    link(rel="stylesheet", href="/style.css")
+
+  body
+    include partials/header
+
+    .detail-container
+
+      if exercise.images && exercise.images.length > 0
+        img.detail-img(src=exercise.images[0].image)
+      else
+        img.detail-img(src="https://via.placeholder.com/600x400?text=Workout")
+
+      .detail-content
+        if exercise.translations && exercise.translations.length > 0
+          h1= exercise.translations[0].name
+          if exercise.translations[0].description
+            p!= exercise.translations[0].description
+        else
+          h1 No English version available
+
+        p
+          strong Category:
+          |  #{exercise.category.name}
+
+        a.back-btn(href="javascript:history.back()") ← Back
+
+    include partials/footer

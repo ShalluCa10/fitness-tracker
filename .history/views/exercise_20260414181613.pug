@@ -1,0 +1,7 @@
+if history
+  h3 Search History
+  ul
+    each h in history
+      li= h
+      searchHistory.unshift(query);
+searchHistory = searchHistory.slice(0, 5);

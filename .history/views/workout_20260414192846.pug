@@ -1,0 +1,16 @@
+doctype html
+html
+  head
+    title Workout
+    link(rel="stylesheet", href="/style.css")
+  body
+    .container
+      h1 Workout Exercises 💪
+
+      a(href="/") Home
+
+      each ex in exercises
+        .card
+          h3= ex.name
+          if ex.description
+            p= ex.description.replace(/<[^>]*>?/gm, '')

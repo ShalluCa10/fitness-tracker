@@ -1,0 +1,51 @@
+doctype html
+html
+  head
+    title Exercise Detail
+    link(rel="stylesheet", href="/style.css")
+
+  body
+    include partials/header
+
+    .detail-container
+
+      // IMAGE (MAIN / FALLBACK)
+      if exercise.images && exercise.images.length > 0
+        img.detail-img(src=exercise.images[0].image)
+      else
+        img.detail-img(src="https://via.placeholder.com/600x400?text=Workout")
+
+      // TITLE + DESCRIPTION (English safe check)
+      - const english = exercise.translations && exercise.translations.find(t => t.language === 2)
+
+      if english
+        h1= english.name
+
+        if english.description
+          p!= english.description
+      else
+        h1 No English version available
+
+      // CATEGORY
+      p
+        strong Category:
+        |  #{exercise.category.name}
+
+      // MUSCLE IMAGES SECTION
+      if exercise.muscles && exercise.muscles.length > 0
+        h3 Muscles Worked
+
+        .muscle-grid
+          each m in exercise.muscles
+            .muscle-card
+              p= m.name_en
+
+              if m.image_url_main
+                img.muscle-img(src=m.image_url_main, alt=m.name_en + " main")
+
+              if m.image_url_secondary
+                img.muscle-img(src=m.image_url_secondary, alt=m.name_en + " secondary")
+
+      a.back-btn(href="javascript:history.back()") ← Back
+
+    include partials/footer

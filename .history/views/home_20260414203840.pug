@@ -1,0 +1,49 @@
+doctype html
+html
+  head
+    title Home
+    link(rel="stylesheet", href="/style.css")
+
+  body
+    include partials/header
+
+    h1 Fitness Motivation
+
+    // ✅ CAROUSEL
+    if banners && banners.length > 0
+      .carousel
+        each b, i in banners
+          .slide(class=i === 0 ? "active" : "")
+            a(href="/quotes")
+              img(srcb.image, alt="banner")
+
+            .overlay
+              h2= b.text
+              p= "- " + b.author
+
+    else
+      p No banners found
+
+    script.
+      const slides = document.querySelectorAll(".slide");
+      let index = 0;
+
+      if (slides.length > 0) {
+        setInterval(() => {
+          slides.forEach(s => s.classList.remove("active"));
+          index = (index + 1) % slides.length;
+          slides[index].classList.add("active");
+        }, 3000);
+      }
+
+    // ✅ WORKOUTS
+    .grid
+      if exercises && exercises.length > 0
+        each ex in exercises
+          .card
+            - var name = ex.translations && ex.translations.length ? ex.translations[0].name : "No name"
+            h3= name
+      else
+        p Loading workouts...
+
+    include partials/footer

@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  h1 quotess
+
+  form(method="POST")
+    input(name="search" placeholder="Search quotes")
+    button Search
+
+  if error
+    p= error
+
+  if data
+    each item in data
+      div.card
+        h3= item.name
+        p!= item.description

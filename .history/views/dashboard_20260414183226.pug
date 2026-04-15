@@ -1,0 +1,11 @@
+extends layout
+
+block content
+  h1 Dashboard
+
+  h2 Total Calories: #{totalCalories}
+
+  h3 workouts Added
+  ul
+    each f in workouts
+      li #{f.name} - #{f.calories} kcal

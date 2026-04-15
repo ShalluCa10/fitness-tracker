@@ -1,0 +1,19 @@
+extends layout
+
+block content
+  h1 workout Search
+
+  form(method="POST" action="/workout")
+    input(type="text" name="search" placeholder="Search workout")
+    button(type="submit") Search
+
+  if data
+    each item in data
+      div.card
+        h3= item.name
+        p Calories: #{item.calories}
+
+        form(method="POST" action="/workout/add")
+          input(type="hidden" name="name" value=item.name)
+          input(type="hidden" name="calories" value=item.calories)
+          button Add

@@ -1,0 +1,16 @@
+doctype html
+html
+  head
+    title Fitness Tracker
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+
+    script.
+      function showLoading() {
+          document.getElementById("loading").style.display = "block";
+      }
+
+  body
+    div#loading(style="display:none; font-weight:bold;")
+      | Loading...
+
+    block content

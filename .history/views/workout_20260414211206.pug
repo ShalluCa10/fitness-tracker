@@ -1,0 +1,104 @@
+//- doctype html
+//- html
+//-   head
+//-     title Workout
+//-     link(rel="stylesheet", href="/style.css")
+
+//-   body
+//-     include partials/header
+
+//-     h1 Workout Exercises 💪
+
+//-     if exercises.length === 0
+//-       p No exercises found
+
+//-     .grid
+//-       each ex in exercises
+//-         .card
+//-           - var name = "No name";
+//-           - var img = "";
+
+//-           if ex.translations && ex.translations.length > 0
+//-             - name = ex.translations[0].name
+//-             - desc = ex.translations[0].description
+
+//-           h3= name
+
+//-           if desc
+//-             p!= desc.replace(/<[^>]*>?/g, '')
+
+//-     include partials/footer
+doctype html
+//- html
+//-   head
+//-     title Workout Details
+//-     link(rel="stylesheet", href="/style.css")
+
+//-   body
+//-     include partials/header
+//-       doctype html
+//- html
+//-   head
+//-     title Workout
+//-     link(rel="stylesheet", href="/style.css")
+
+//-   body
+//-     .container
+//-       h1 Workout Exercises 💪
+
+//-       a(href="/") Home
+
+//-       each ex in exercises
+//-         .card
+//-           h3= ex.translations?.[0]?.name || "No name"
+
+//-           if ex.translations && ex.translations.length > 0
+//-             p!= ex.translations[0].description
+//-           else
+//-             p No description available
+
+    //- h1= category + " Workouts"
+
+    //- .grid
+    //-   if exercises && exercises.length > 0
+    //-     each ex in exercises
+    //-       .card
+    //-        - var name = "No name"
+    //-        if ex.translations && ex.translations.length > 0 && ex.translations[0].name
+    //-          - name = ex.translations[0].name
+
+    //-        h3= name
+    //-         - var img = null
+
+    //-         if ex.images && ex.images.length > 0 && ex.images[0].image
+    //-            - img = ex.images[0].image
+
+    //-         if img
+    //-           img(src=img)
+    //-         if ex.translations && ex.translations.length > 0
+    //-           p!= ex.translations[0].description
+    //-   else
+    //-     p No exercises found
+doctype html
+html
+  head
+    title Workouts
+    link(rel="stylesheet", href="/style.css")
+
+  body
+    include partials/header
+
+    h1= category
+
+    .grid
+      each ex in exercises
+        .card
+          if ex.images && ex.images.length > 0
+            img(src=ex.images[0].image)
+
+          h3= ex.translations && ex.translations.length > 0 
+            ? ex.translations[0].name 
+            : "No name"
+
+    include partials/footer
+    

@@ -1,0 +1,52 @@
+doctype html
+html
+  head
+    title Exercise Detail
+    link(rel="stylesheet", href="/style.css")
+
+  body
+    include partials/header
+
+    .detail-container
+
+      - const english = exercise.translations.find(t => t.language === 2)
+
+      if english
+        h1= english.name
+
+        if english.description
+          p!= english.description
+        else
+          p No description available
+      else
+        h1 No English version available
+      // =====================
+// EXERCISE IMAGES
+// =====================
+
+if exercise.images && exercise.images.length > 0
+
+  // MAIN IMAGE
+  - var mainImage = exercise.images.find(i => i.is_main)
+
+  if mainImage
+    img.detail-main-img(src=mainImage.image)
+  else
+    img.detail-main-img(src=exercise.images[0].image)
+
+  // SECONDARY IMAGES
+  .image-grid
+    each img in exercise.images
+      if !img.is_main
+        img.small-img(src=img.image)
+else
+  img.detail-main-img(src="https://via.placeholder.com/600x400?text=No+Image")
+      // CATEGORY 
+      p
+        strong Category:
+        |  #{exercise.category.name}
+
+      // BACK BUTTON
+      a.back-btn(href="javascript:history.back()") ← Back
+
+    include partials/footer

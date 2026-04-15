@@ -1,0 +1,28 @@
+doctype html
+html
+  head
+    title Home
+    link(rel="stylesheet", href="/style.css")
+
+  body
+    include partials/header
+    include partials/banner
+
+    h2 Featured Workouts
+
+    .grid
+      if exercises && exercises.length
+        each ex in exercises
+          .card
+            - var name = "No name";
+            - var img = "";
+
+            if ex.translations && ex.translations.length > 0
+              - name = ex.translations[0].name
+
+            h3= name
+
+      else
+        p Loading workouts...
+
+    include partials/footer

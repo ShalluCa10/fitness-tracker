@@ -1,0 +1,21 @@
+doctype html
+html
+  head
+    title Quotes
+    link(rel="stylesheet", href="/style.css")
+
+  body
+
+    include partials/header
+
+    h1 All Motivational Quotes 💬
+
+    .grid
+      each q in quotes
+        .card
+          h3= q.text
+          p.author= "- " + (q.author || "Unknown")
+
+    a(href="/") Back to Home
+
+    include partials/footer

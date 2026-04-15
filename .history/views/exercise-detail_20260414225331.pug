@@ -1,0 +1,40 @@
+doctype html
+html
+  head
+    title Home
+    link(rel="stylesheet", href="/style.css")
+
+  body
+    include partials/header
+
+.detail-container
+
+  .detail-row
+
+    // LEFT IMAGE
+    .detail-left
+      if exercise.images && exercise.images.length > 0
+        img.detail-img(src=exercise.images[0].image)
+      else
+        img.detail-img(src="https://via.placeholder.com/600x400?text=Workout")
+
+    // RIGHT CONTENT
+    .detail-right
+      - const english = exercise.translations && exercise.translations.find(t => t.language === 2)
+
+      if english
+        h1= english.name
+
+        if english.description
+          p!= english.description
+        else
+          p No description available
+      else
+        h1 No English version available
+
+      if exercise.category
+        p
+          strong Category:
+          |  #{exercise.category.name}
+
+      a.back-btn(href="javascript:history.back()") ← Back

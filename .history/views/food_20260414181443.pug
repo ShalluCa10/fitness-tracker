@@ -1,0 +1,11 @@
+if totalCalories
+  h2 Total Daily Calories: #{totalCalories}
+  each item in data
+  div
+    h3= item.product_name
+    p Calories: #{item.nutriments?.['energy-kcal_100g'] || 0}
+
+    form(method="POST" action="/workout/add")
+      input(type="hidden" name="name" value=item.product_name)
+      input(type="hidden" name="calories" value=item.nutriments?.['energy-kcal_100g'] || 0)
+      button Add to Daily List

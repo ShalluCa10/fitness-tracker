@@ -1,0 +1,23 @@
+const express = require("express");
+const router = express.Router();
+const axios = require("axios");
+
+doctype html
+html
+  head
+    title Workout
+    link(rel="stylesheet", href="/style.css")
+  body
+    .container
+      h1 Workout Exercises 💪
+
+      a(href="/") Home
+
+      if exercises.length
+        each ex in exercises
+          .card
+            h3= ex.name
+            p= ex.description
+      else
+        p No exercises found
+module.exports = router;

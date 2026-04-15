@@ -1,0 +1,32 @@
+doctype html
+html
+  head
+    title Exercise Detail
+    link(rel="stylesheet", href="/style.css")
+
+  body
+    include partials/header
+
+    .detail-container
+
+      - const english = exercise.translations.find(t => t.language === 2)
+
+      if english
+        h1= english.name
+
+        if english.description
+          p!= english.description
+        else
+          p No description available
+      else
+        h1 No English version available
+
+      // CATEGORY (always show)
+      p
+        strong Category:
+        |  #{exercise.category.name}
+
+      // BACK BUTTON
+      a.back-btn(href="javascript:history.back()") ← Back
+
+    include partials/footer
